@@ -2234,5 +2234,43 @@
 
     setInterval(nextSlide, 4000);
 </script>
+
+<!-- Tambahan Sinkronisasi Lintas Device (tanpa mengubah tampilan utama) -->
+<script>
+(function(){
+    // Menandai status koneksi dan membantu refresh data antar perangkat
+    const syncBadge = document.createElement('div');
+    syncBadge.id = 'deviceSyncStatus';
+    syncBadge.style.cssText =
+        'position:fixed;bottom:15px;right:15px;z-index:9999;' +
+        'padding:8px 14px;border-radius:20px;background:#ecfdf5;' +
+        'color:#047857;font-size:12px;font-weight:600;' +
+        'box-shadow:0 4px 12px rgba(0,0,0,.15);';
+    syncBadge.innerHTML = '● Sistem Sinkron Aktif';
+    document.body.appendChild(syncBadge);
+
+    // Update saat koneksi internet berubah
+    function updateConnection(){
+        if(navigator.onLine){
+            syncBadge.innerHTML = '● Online - Data dapat diperbarui';
+        }else{
+            syncBadge.innerHTML = '● Offline';
+        }
+    }
+
+    window.addEventListener('online', updateConnection);
+    window.addEventListener('offline', updateConnection);
+
+    // Memaksa sinkronisasi ulang jika tab kembali dibuka
+    document.addEventListener('visibilitychange', function(){
+        if(document.visibilityState === 'visible' &&
+           typeof fetchDataFromGoogleSheet === 'function'){
+            fetchDataFromGoogleSheet();
+        }
+    });
+
+})();
+</script>
+
 </body>
 </html>
