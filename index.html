@@ -1243,12 +1243,12 @@
         }, 8000);
 
         let dbState = {
-            gudang: JSON.parse(localStorage.getItem('sipensil_gudang')) || [],
-            label: JSON.parse(localStorage.getItem('sipensil_label')) || [],
-            pestisida: JSON.parse(localStorage.getItem('sipensil_pestisida')) || [],
-            sppg: JSON.parse(localStorage.getItem('sipensil_sppg')) || [],
+            gudang: [],
+            label:  [],
+            pestisida: [],
+            sppg: [],
             settings: JSON.parse(localStorage.getItem('sipensil_settings')) || {
-                scriptUrl: '',
+                scriptUrl: 'https://script.google.com/macros/s/AKfycbziQdV4W6lm4G0j6MjOk7iF-stV01Jp0FFJNwkzuHhyi3nOq579Dx8EnSWeIThqzJY/exec',
                 sheetUrl: 'https://docs.google.com/spreadsheets',
                 driveUrl: 'https://drive.google.com'
             }
